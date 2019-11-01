@@ -32,9 +32,17 @@ namespace FirstExcelAddIn_2019_10_29
             /* The Wb parameter is a Workbook object, which represents the saved workbook */
             Excel.Worksheet activeWorksheet = ((Excel.Worksheet)Application.ActiveSheet);
             Excel.Range firstRow = activeWorksheet.get_Range("A1");
-            firstRow.EntireRow.Insert(Excel.XlInsertShiftDirection.xlShiftDown);
-            Excel.Range newFirstRow = activeWorksheet.get_Range("A1");
-            newFirstRow.Value2 = "This text was added by using code";
+
+            /* create string to insert with year month day hour minute second */
+            String insertTime = "'Saved at " + DateTime.Now.ToString();
+
+            /* check value for firstRow */
+            if (firstRow.Value != insertTime)
+            {
+                firstRow.EntireRow.Insert(Excel.XlInsertShiftDirection.xlShiftDown);
+                Excel.Range newFirstRow = activeWorksheet.get_Range("A1");
+                newFirstRow.Value2 = insertTime;
+            }
         }
         #region VSTO generated code
 
